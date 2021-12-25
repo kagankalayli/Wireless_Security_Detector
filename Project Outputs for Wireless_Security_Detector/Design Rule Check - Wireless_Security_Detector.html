@@ -1,0 +1,605 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">25.12.2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">18:49:36</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:12</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc" class="file"><acronym title="C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc">C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">87</td></tr>
+</table>
+</td>
+</table><a name="IDN23WLDDEUXGZK1FILWP2XF1YHNFPYG3IDJM0QRKERB4K01O0OFIL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXB14KO1W21OFF412YQ2LTQO0PLWVSCPFHF44ZEPZU0OMQ0UR2YL">Clearance Constraint (Gap=9mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNNWICSXCTHBQPDBJ0FBP12XLKI0EC1P3AVJDGLFD0RP2IRRRREJP">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL4T4BHJHZ0IOPARIURRWR4P3DETLK04MDKWIXQPPDMJMQSPTM1ZN">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVMYNMJNPNBTTK1C5NRLSDUR5MJYSF4XAJ5DTKXIRSK32J2S4SYKK">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5NFDS51HUVKCDEDWSDKXTOK1EOS0HHPPZN3UZAPAUZON13W0C5M">Width Constraint (Min=8mil) (Max=70mil) (Preferred=11mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5ZZEZ5GNMNHFOSSLHP5CHLPBQDZOTMHCCAO2PNG4L3ECHBFLJSWB">SMD To Corner (Distance=1mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFBXK5HKKJESKJPM1JYE0L03OBEOUZ3CO1ZODPKF4GIRRJHYEWCLE">Power Plane Connect Rule(Relief Connect )(Expansion=15mil) (Conductor Width=15mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDT4JCN0FLFARQPMW1ZOW4I0QGKJARBGA0SENLCSNXJ5U2IC04HSU">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPTDROYDLA2ANFZZKZX2THFY3FEWSWFQKSS5QIUGYKHMBA3JBA1SK">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFSFUCW5SE3IFKFA2FI0CO3DQ5EF0QH5LR0Z0PCILYV0STH0NWBHG">Minimum Solder Mask Sliver (Gap=5mil) (All),(All)</a></td>
+<td class="column2">74</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTIWZJOFCU3ZYO53O4ONKAMQOGNKWIME5JTQ5XGNOG5TCKEB11YM">Silk To Solder Mask (Clearance=5mil) (Disabled)(IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKGB3IJQYF4PNF5DWLPPXT4YWM420ZTGXRF35LHYWWAJDX4GWNGE">Silk to Silk (Clearance=0mil) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLINOISMXYYW5CALEHQHBPDVVWGTZTBQOH51FIGBZ04S23EVH2LHG">Net Antennae (Tolerance=10mil) (All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWXI420GRG5G1O2E14FY1YDQSSCVQQESEPTGJP2ZCL1TMI3HZKCN">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">87</td>
+</tr>
+</table><br><a name="IDT4JCN0FLFARQPMW1ZOW4I0QGKJARBGA0SENLCSNXJ5U2IC04HSU"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1247.406mil|Location2.X=1366.766mil|Location1.Y=2924.572mil|Location2.Y=3043.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1247.406mil|Location2.X=1366.766mil|Location1.Y=2924.572mil|Location2.Y=3043.932mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad J3-2(307.086mil,1866.142mil) on Multi-Layer Actual Slot Hole Width = 118.11mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1373.39mil|Location2.X=1492.75mil|Location1.Y=2735.596mil|Location2.Y=2854.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1373.39mil|Location2.X=1492.75mil|Location1.Y=2735.596mil|Location2.Y=2854.956mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad J3-3(433.07mil,1677.166mil) on Multi-Layer Actual Slot Hole Width = 118.11mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2408.824mil|Location2.X=2528.184mil|Location1.Y=1429.494mil|Location2.Y=1548.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2408.824mil|Location2.X=2528.184mil|Location1.Y=1429.494mil|Location2.Y=1548.854mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad J5-2(1468.504mil,371.064mil) on Multi-Layer Actual Slot Hole Width = 118.11mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2597.8mil|Location2.X=2717.16mil|Location1.Y=1555.478mil|Location2.Y=1674.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2597.8mil|Location2.X=2717.16mil|Location1.Y=1555.478mil|Location2.Y=1674.838mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad J5-3(1657.48mil,497.048mil) on Multi-Layer Actual Slot Hole Width = 118.11mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDPTDROYDLA2ANFZZKZX2THFY3FEWSWFQKSS5QIUGYKHMBA3JBA1SK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole To Hole Clearance (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2870.34mil|Location2.X=2878.007mil|Location1.Y=2779.631mil|Location2.Y=2787.298mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2870.34mil|Location2.X=2878.007mil|Location1.Y=2779.631mil|Location2.Y=2787.298mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (1874.174mil,1665.354mil) from Power to Bottom Layer And Via (1874.174mil,1665.354mil) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2925.301mil|Location2.X=2932.967mil|Location1.Y=2728.45mil|Location2.Y=2736.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2925.301mil|Location2.X=2932.967mil|Location1.Y=2728.45mil|Location2.Y=2736.117mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (1929.134mil,1614.173mil) from Top Layer to Bottom Layer And Via (1929.134mil,1614.173mil) from Top Layer to Power Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3000.105mil|Location2.X=3007.771mil|Location1.Y=1775.169mil|Location2.Y=1782.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3000.105mil|Location2.X=3007.771mil|Location1.Y=1775.169mil|Location2.Y=1782.835mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (2003.938mil,660.892mil) from Top Layer to Bottom Layer And Via (2003.938mil,660.892mil) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3000.105mil|Location2.X=3007.771mil|Location1.Y=1804.855mil|Location2.Y=1812.521mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3000.105mil|Location2.X=3007.771mil|Location1.Y=1804.855mil|Location2.Y=1812.521mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (2003.938mil,690.578mil) from Top Layer to Bottom Layer And Via (2003.938mil,690.578mil) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3013.883mil|Location2.X=3021.55mil|Location1.Y=3156.6mil|Location2.Y=3164.266mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3013.883mil|Location2.X=3021.55mil|Location1.Y=3156.6mil|Location2.Y=3164.266mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (2017.716mil,2042.323mil) from Power to Bottom Layer And Via (2017.716mil,2042.323mil) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3149.71mil|Location2.X=3157.377mil|Location1.Y=1846.56mil|Location2.Y=1854.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3149.71mil|Location2.X=3157.377mil|Location1.Y=1846.56mil|Location2.Y=1854.227mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 10mil) Between Via (2153.543mil,732.284mil) from Power to Bottom Layer And Via (2153.543mil,732.284mil) from Top Layer to Bottom Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFSFUCW5SE3IFKFA2FI0CO3DQ5EF0QH5LR0Z0PCILYV0STH0NWBHG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=5mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.529mil|Location2.X=4274.779mil|Location1.Y=1508.686mil|Location2.Y=1514.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.529mil|Location2.X=4274.779mil|Location1.Y=1508.686mil|Location2.Y=1514.936mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad C13-1(3295.276mil,411.418mil) on Bottom Layer And Via (3271.653mil,377.953mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.914mil|Location2.X=4188.164mil|Location1.Y=1508.686mil|Location2.Y=1514.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.914mil|Location2.X=4188.164mil|Location1.Y=1508.686mil|Location2.Y=1514.936mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad C14-1(3212.598mil,411.418mil) on Bottom Layer And Via (3185.039mil,377.953mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.56mil|Location2.X=3397.81mil|Location1.Y=2546.284mil|Location2.Y=2552.534mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3391.56mil|Location2.X=3397.81mil|Location1.Y=2546.284mil|Location2.Y=2552.534mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.543mil &lt; 5mil) Between Pad C22-2(2386.811mil,1413.78mil) on Top Layer And Via (2394.685mil,1446.85mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.543mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2685.851mil|Location2.X=2692.101mil|Location1.Y=2760.655mil|Location2.Y=2766.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2685.851mil|Location2.X=2692.101mil|Location1.Y=2760.655mil|Location2.Y=2766.905mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.937mil &lt; 5mil) Between Pad C28-2(1696.85mil,1663.386mil) on Top Layer And Via (1688.976mil,1629.921mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.937mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1580.03mil|Location2.X=1587.585mil|Location1.Y=3086.662mil|Location2.Y=3094.154mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1580.03mil|Location2.X=1587.585mil|Location1.Y=3086.662mil|Location2.Y=3094.154mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.496mil &lt; 5mil) Between Pad J3-1(555.118mil,1909.45mil) on Multi-Layer And Via (594.488mil,1984.252mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.496mil] / [Bottom Solder] Mask Sliver [4.496mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,608.858mil) on Top Layer And Pad U5-39(560.04mil,644.98mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,608.858mil) on Top Layer And Pad U5-39(596.162mil,608.858mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,644.98mil) on Multi-Layer And Pad U5-39(560.04mil,681.102mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,681.102mil) on Top Layer And Pad U5-39(560.04mil,717.224mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,681.102mil) on Top Layer And Pad U5-39(596.162mil,681.102mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.915mil|Location2.X=1563.165mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,717.224mil) on Multi-Layer And Pad U5-39(560.04mil,753.346mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.114mil|Location2.X=1591.364mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(560.04mil,753.346mil) on Top Layer And Pad U5-39(596.162mil,753.346mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(596.162mil,608.858mil) on Multi-Layer And Pad U5-39(632.284mil,608.858mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(596.162mil,681.102mil) on Multi-Layer And Pad U5-39(632.284mil,681.102mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1600.96mil|Location2.X=1607.21mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(596.162mil,753.346mil) on Multi-Layer And Pad U5-39(632.284mil,753.346mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,608.858mil) on Top Layer And Pad U5-39(632.284mil,644.98mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,608.858mil) on Top Layer And Pad U5-39(668.406mil,608.858mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,644.98mil) on Multi-Layer And Pad U5-39(632.284mil,681.102mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,681.102mil) on Top Layer And Pad U5-39(632.284mil,717.224mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,681.102mil) on Top Layer And Pad U5-39(668.406mil,681.102mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.159mil|Location2.X=1635.409mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,717.224mil) on Multi-Layer And Pad U5-39(632.284mil,753.346mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.358mil|Location2.X=1663.608mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(632.284mil,753.346mil) on Top Layer And Pad U5-39(668.406mil,753.346mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1723.843mil|Location2.Y=1730.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(668.406mil,608.858mil) on Multi-Layer And Pad U5-39(704.528mil,608.858mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1796.087mil|Location2.Y=1802.337mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(668.406mil,681.102mil) on Multi-Layer And Pad U5-39(704.528mil,681.102mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1673.204mil|Location2.X=1679.454mil|Location1.Y=1868.331mil|Location2.Y=1874.581mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(668.406mil,753.346mil) on Multi-Layer And Pad U5-39(704.528mil,753.346mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1752.042mil|Location2.Y=1758.292mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(704.528mil,608.858mil) on Top Layer And Pad U5-39(704.528mil,644.98mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1767.888mil|Location2.Y=1774.138mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(704.528mil,644.98mil) on Multi-Layer And Pad U5-39(704.528mil,681.102mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1824.286mil|Location2.Y=1830.536mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(704.528mil,681.102mil) on Top Layer And Pad U5-39(704.528mil,717.224mil) on Multi-Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1701.403mil|Location2.X=1707.653mil|Location1.Y=1840.132mil|Location2.Y=1846.382mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.098mil &lt; 5mil) Between Pad U5-39(704.528mil,717.224mil) on Multi-Layer And Pad U5-39(704.528mil,753.346mil) on Top Layer [Top Solder] Mask Sliver [0.098mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2941.758mil|Location2.X=2948.008mil|Location1.Y=2989.001mil|Location2.Y=2995.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2941.758mil|Location2.X=2948.008mil|Location1.Y=2989.001mil|Location2.Y=2995.251mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-1(1919.292mil,1883.858mil) on Top Layer And Pad U6-2(1919.292mil,1864.174mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2811.836mil|Location2.Y=2818.086mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2811.836mil|Location2.Y=2818.086mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-10(1919.292mil,1706.694mil) on Top Layer And Pad U6-11(1919.292mil,1687.008mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2831.521mil|Location2.Y=2837.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2831.521mil|Location2.Y=2837.771mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-10(1919.292mil,1706.694mil) on Top Layer And Pad U6-9(1919.292mil,1726.378mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2792.151mil|Location2.Y=2798.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2792.151mil|Location2.Y=2798.401mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-11(1919.292mil,1687.008mil) on Top Layer And Pad U6-12(1919.292mil,1667.324mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.064mil|Location2.X=2991.314mil|Location1.Y=2748.843mil|Location2.Y=2755.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.064mil|Location2.X=2991.314mil|Location1.Y=2748.843mil|Location2.Y=2755.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-13(1978.346mil,1608.268mil) on Top Layer And Pad U6-14(1998.032mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3004.749mil|Location2.X=3010.999mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3004.749mil|Location2.X=3010.999mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-14(1998.032mil,1608.268mil) on Top Layer And Pad U6-15(2017.716mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3024.434mil|Location2.X=3030.684mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3024.434mil|Location2.X=3030.684mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-15(2017.716mil,1608.268mil) on Top Layer And Pad U6-16(2037.402mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3044.119mil|Location2.X=3050.369mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3044.119mil|Location2.X=3050.369mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-16(2037.402mil,1608.268mil) on Top Layer And Pad U6-17(2057.086mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3063.804mil|Location2.X=3070.054mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3063.804mil|Location2.X=3070.054mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-17(2057.086mil,1608.268mil) on Top Layer And Pad U6-18(2076.772mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3083.489mil|Location2.X=3089.739mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3083.489mil|Location2.X=3089.739mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-18(2076.772mil,1608.268mil) on Top Layer And Pad U6-19(2096.456mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.174mil|Location2.X=3109.424mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.174mil|Location2.X=3109.424mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-19(2096.456mil,1608.268mil) on Top Layer And Pad U6-20(2116.142mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2969.316mil|Location2.Y=2975.566mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2969.316mil|Location2.Y=2975.566mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-2(1919.292mil,1864.174mil) on Top Layer And Pad U6-3(1919.292mil,1844.488mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.859mil|Location2.X=3129.109mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.859mil|Location2.X=3129.109mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-20(2116.142mil,1608.268mil) on Top Layer And Pad U6-21(2135.826mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.544mil|Location2.X=3148.794mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.544mil|Location2.X=3148.794mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-21(2135.826mil,1608.268mil) on Top Layer And Pad U6-22(2155.512mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3162.229mil|Location2.X=3168.479mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3162.229mil|Location2.X=3168.479mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-22(2155.512mil,1608.268mil) on Top Layer And Pad U6-23(2175.196mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.914mil|Location2.X=3188.164mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.914mil|Location2.X=3188.164mil|Location1.Y=2697.662mil|Location2.Y=2703.912mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-23(2175.196mil,1608.268mil) on Top Layer And Pad U6-24(2194.882mil,1608.268mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2792.151mil|Location2.Y=2798.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2792.151mil|Location2.Y=2798.401mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-25(2253.938mil,1667.324mil) on Top Layer And Pad U6-26(2253.938mil,1687.008mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2811.836mil|Location2.Y=2818.086mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2811.836mil|Location2.Y=2818.086mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-26(2253.938mil,1687.008mil) on Top Layer And Pad U6-27(2253.938mil,1706.694mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2831.521mil|Location2.Y=2837.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2831.521mil|Location2.Y=2837.771mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-27(2253.938mil,1706.694mil) on Top Layer And Pad U6-28(2253.938mil,1726.378mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2851.206mil|Location2.Y=2857.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2851.206mil|Location2.Y=2857.456mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-28(2253.938mil,1726.378mil) on Top Layer And Pad U6-29(2253.938mil,1746.064mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2870.891mil|Location2.Y=2877.141mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2870.891mil|Location2.Y=2877.141mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-29(2253.938mil,1746.064mil) on Top Layer And Pad U6-30(2253.938mil,1765.748mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2949.631mil|Location2.Y=2955.881mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2949.631mil|Location2.Y=2955.881mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-3(1919.292mil,1844.488mil) on Top Layer And Pad U6-4(1919.292mil,1824.804mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2890.576mil|Location2.Y=2896.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2890.576mil|Location2.Y=2896.826mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-30(2253.938mil,1765.748mil) on Top Layer And Pad U6-31(2253.938mil,1785.434mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2910.261mil|Location2.Y=2916.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2910.261mil|Location2.Y=2916.511mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-31(2253.938mil,1785.434mil) on Top Layer And Pad U6-32(2253.938mil,1805.118mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2929.946mil|Location2.Y=2936.196mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2929.946mil|Location2.Y=2936.196mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-32(2253.938mil,1805.118mil) on Top Layer And Pad U6-33(2253.938mil,1824.804mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2949.631mil|Location2.Y=2955.881mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2949.631mil|Location2.Y=2955.881mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-33(2253.938mil,1824.804mil) on Top Layer And Pad U6-34(2253.938mil,1844.488mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2969.316mil|Location2.Y=2975.566mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.222mil|Location2.X=3231.472mil|Location1.Y=2969.316mil|Location2.Y=2975.566mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-34(2253.938mil,1844.488mil) on Top Layer And Pad U6-35(2253.938mil,1864.174mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3276.403mil|Location2.X=3282.653mil|Location1.Y=2989.001mil|Location2.Y=2995.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3276.403mil|Location2.X=3282.653mil|Location1.Y=2989.001mil|Location2.Y=2995.251mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-35(2253.938mil,1864.174mil) on Top Layer And Pad U6-36(2253.938mil,1883.858mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.915mil|Location2.X=3188.165mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.915mil|Location2.X=3188.165mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-37(2194.882mil,1942.914mil) on Top Layer And Pad U6-38(2175.198mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3162.23mil|Location2.X=3168.48mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3162.23mil|Location2.X=3168.48mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-38(2175.198mil,1942.914mil) on Top Layer And Pad U6-39(2155.512mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.544mil|Location2.X=3148.794mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.544mil|Location2.X=3148.794mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-39(2155.512mil,1942.914mil) on Top Layer And Pad U6-40(2135.826mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2929.946mil|Location2.Y=2936.196mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2929.946mil|Location2.Y=2936.196mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-4(1919.292mil,1824.804mil) on Top Layer And Pad U6-5(1919.292mil,1805.118mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.859mil|Location2.X=3129.109mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.859mil|Location2.X=3129.109mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-40(2135.826mil,1942.914mil) on Top Layer And Pad U6-41(2116.142mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.174mil|Location2.X=3109.424mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.174mil|Location2.X=3109.424mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-41(2116.142mil,1942.914mil) on Top Layer And Pad U6-42(2096.456mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3083.489mil|Location2.X=3089.739mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3083.489mil|Location2.X=3089.739mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-42(2096.456mil,1942.914mil) on Top Layer And Pad U6-43(2076.772mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3063.804mil|Location2.X=3070.054mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3063.804mil|Location2.X=3070.054mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-43(2076.772mil,1942.914mil) on Top Layer And Pad U6-44(2057.086mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3044.119mil|Location2.X=3050.369mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3044.119mil|Location2.X=3050.369mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-44(2057.086mil,1942.914mil) on Top Layer And Pad U6-45(2037.402mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3024.434mil|Location2.X=3030.684mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3024.434mil|Location2.X=3030.684mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-45(2037.402mil,1942.914mil) on Top Layer And Pad U6-46(2017.716mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3004.749mil|Location2.X=3010.999mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3004.749mil|Location2.X=3010.999mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-46(2017.716mil,1942.914mil) on Top Layer And Pad U6-47(1998.032mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.064mil|Location2.X=2991.314mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2985.064mil|Location2.X=2991.314mil|Location1.Y=3032.309mil|Location2.Y=3038.559mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-47(1998.032mil,1942.914mil) on Top Layer And Pad U6-48(1978.346mil,1942.914mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2910.261mil|Location2.Y=2916.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2910.261mil|Location2.Y=2916.511mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-5(1919.292mil,1805.118mil) on Top Layer And Pad U6-6(1919.292mil,1785.434mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2890.576mil|Location2.Y=2896.826mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2890.576mil|Location2.Y=2896.826mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-6(1919.292mil,1785.434mil) on Top Layer And Pad U6-7(1919.292mil,1765.748mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2870.891mil|Location2.Y=2877.141mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2870.891mil|Location2.Y=2877.141mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.936mil &lt; 5mil) Between Pad U6-7(1919.292mil,1765.748mil) on Top Layer And Pad U6-8(1919.292mil,1746.064mil) on Top Layer [Top Solder] Mask Sliver [3.936mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2851.206mil|Location2.Y=2857.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2890.577mil|Location2.X=2896.827mil|Location1.Y=2851.206mil|Location2.Y=2857.456mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.938mil &lt; 5mil) Between Pad U6-8(1919.292mil,1746.064mil) on Top Layer And Pad U6-9(1919.292mil,1726.378mil) on Top Layer [Top Solder] Mask Sliver [3.938mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3713.126mil|Location2.X=3719.376mil|Location1.Y=2913.66mil|Location2.Y=2919.91mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3713.126mil|Location2.X=3719.376mil|Location1.Y=2913.66mil|Location2.Y=2919.91mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.447mil &lt; 5mil) Between Via (2712.03mil,1786.326mil) from Top Layer to Bottom Layer And Via (2720.472mil,1811.024mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.447mil] / [Bottom Solder] Mask Sliver [4.447mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDLINOISMXYYW5CALEHQHBPDVVWGTZTBQOH51FIGBZ04S23EVH2LHG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=10mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1680.082mil|Location2.X=1773.093mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1680.082mil|Location2.X=1773.093mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True">Net Antennae: Via (720.472mil,1358.268mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1719.452mil|Location2.X=1812.463mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1719.452mil|Location2.X=1812.463mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True">Net Antennae: Via (759.842mil,1358.268mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1798.192mil|Location2.X=1891.203mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\skaga\Desktop\Altium Projects\WSD\Wireless_Security_Detector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1798.192mil|Location2.X=1891.203mil|Location1.Y=2435.988mil|Location2.Y=2586.954mil|Absolute=True">Net Antennae: Via (838.582mil,1358.268mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
