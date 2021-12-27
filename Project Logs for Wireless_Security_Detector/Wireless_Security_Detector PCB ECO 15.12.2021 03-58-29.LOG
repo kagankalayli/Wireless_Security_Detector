@@ -1,9 +1,0 @@
-Removed Pin From Net: NetName=LED_S Pin=J1-2
-Removed Pin From Net: NetName=TEMP_ADC Pin=J1-3
-Removed Pin From Net: NetName=GND_S Pin=J1-5
-Added Pin To Net: NetName=GND_S Pin=J1-2
-Added Pin To Net: NetName=LED_S Pin=J1-3
-Added Pin To Net: NetName=TEMP_ADC Pin=J1-4
-Added Pin To Net: NetName=NetJ1_5 Pin=J1-5
-Added Pin To Net: NetName=NetJ1_5 Pin=U2-8
-Added Net: Name=NetJ1_5
