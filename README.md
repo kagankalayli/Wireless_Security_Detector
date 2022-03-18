@@ -1,5 +1,5 @@
 # Wireless Security Detector
-The board operates on 220V 50Hz AC voltage. When the board detects a movement in the environment, it transmits audio and visual information to the user with the ESP32-WROOM-32 Wi-Fi module.
+ARM microcontroller-based wireless security detector that instantly alerts the user with ESP32-WROOM-32 Wi-Fi module when it detects a movement in the environment.
 <br/> 
 <br/> The schematics and 3D views of PCB are below.
 ## Block Diagram of the System
